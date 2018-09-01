@@ -9,6 +9,8 @@ parser.add_argument("-s", dest="structure", required=True,
                     help="Structure filename directory '/home/patgen/Documentos/Dynamics/ProjectName'", type=lambda f: open(f))
 parser.add_argument("-f", dest="folder", required=True,
                     help="Desired project folder name")
+parser.add_argument("-mdt", dest="mdtime", required=True,
+                    help="MD simulation time in nsteps (2 * 500000 = 1000 ps (1 ns)")
 args = parser.parse_args()
 
 def yes_or_no(question):
@@ -29,6 +31,7 @@ print("done")
 
 print(args.structure.name)
 print(args.folder)
+print(args.mdtime)
 
 with system(args.folder):
     # System preparation
@@ -37,7 +40,8 @@ with system(args.folder):
         water = 'spce',
         f     = [args.structure.name],
         o     = 'prot.gro',
-        p     = 'topol.top'
+        p     = 'topol.top',
+        ignh = 'true'
     )
 
     editconf(
@@ -165,7 +169,9 @@ with system(args.folder):
 
     # Molecular dynamics
     grompp(
-        f = MDP['md.mdp'],
+        f = MDP['md.mdp', {
+            'nsteps'       : args.mdtime ,
+        }],
         c = 'npt.gro',
         o = 'md.tpr',
         p = 'topol.top',
@@ -244,13 +250,5 @@ with system(args.folder):
         g = 'hbond.log',
         stdin = """
             1 1
-        """
-    )
-    rg(
-        s = 'md.tpr',
-        f = 'md_noPBC.xtc',
-        o = 'rg.xvg',
-        stdin = """
-            1
         """
     )
