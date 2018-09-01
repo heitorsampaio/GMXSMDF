@@ -8,7 +8,7 @@ setup(
     description = 'Gromacs simple MD framework',
     author = 'Heitor Sampaio',
     author_email = 'horlando.heitor@gmail.com',
-    url = 'https://github.com/heitorsampaio/GASMDF',
-    download_url = 'https://github.com//heitorsampaio/GASMDF/tarball/%s' % VERSION,
+    url = 'https://github.com/heitorsampaio/GMXSMDF',
+    download_url = 'https://github.com//heitorsampaio/GMXSMDF/tarball/%s' % VERSION,
     py_modules = ['gmxsmdscript'],
  )
