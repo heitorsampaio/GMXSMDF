@@ -3,8 +3,7 @@ Gromacs Simple MD framework
 
 ## Dependencies 
 
-Python 3.4 or higher
-Gromacs 5 or higher
+Python 3.4 or higher and Gromacs 5 or higher
 
 ## Instalation and Usage
 
