@@ -10,4 +10,4 @@ Gromacs 5 or higher
 
 Enter `python3 setup.py install` at your command line.
 
-Run the script, `python3 gmxsmdf.py`
+Run the script, `python3 gmxsmdf.py -s [structure file location] -f [Project Folder name]`
