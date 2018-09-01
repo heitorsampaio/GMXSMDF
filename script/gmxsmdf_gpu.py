@@ -38,14 +38,6 @@ with system(args.folder):
         p     = 'topol.top'
         ignh = 'true'
     )
-    # System preparation
-    pdb2gmx(
-        ff    = 'gromos53a6',
-        water = 'spce',
-        f     = PDB['1AKI'],
-        o     = 'prot.gro',
-        p     = 'topol.top'
-    )
 
     editconf(
         f  = 'prot.gro',
