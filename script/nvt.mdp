@@ -1,4 +1,4 @@
-title		= OPLS Lysozyme NVT equilibration 
+title		= OPLS Lysozyme NVT equilibration
 define		= -DPOSRES	; position restrain the protein
 ; Run parameters
 integrator	= md		; leap-frog integrator
@@ -11,7 +11,7 @@ nstenergy	= 500		; save energies every 1.0 ps
 nstlog		= 500		; update log file every 1.0 ps
 ; Bond parameters
 continuation	        = no		; first dynamics run
-constraint_algorithm    = lincs	    ; holonomic constraints 
+constraint_algorithm    = lincs	    ; holonomic constraints
 constraints	            = all-bonds	; all bonds (even heavy atom-H bonds) constrained
 lincs_iter	            = 1		    ; accuracy of LINCS
 lincs_order	            = 4		    ; also related to accuracy
@@ -41,4 +41,3 @@ DispCorr	= EnerPres	; account for cut-off vdW scheme
 gen_vel		= yes		; assign velocities from Maxwell distribution
 gen_temp	= 310		; temperature for Maxwell distribution
 gen_seed	= -1		; generate a random seed
-
