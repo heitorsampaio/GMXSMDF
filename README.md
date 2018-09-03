@@ -1,7 +1,7 @@
 # GMXSMDF
 Gromacs Simple MD framework
 
-## Dependencies 
+## Dependencies
 
 Python 3.4 or higher and Gromacs 5 or higher
 
@@ -9,4 +9,4 @@ Python 3.4 or higher and Gromacs 5 or higher
 
 Enter `python3 setup.py install` at your command line.
 
-Run the script, `python3 gmxsmdf.py -s [structure file location] -f [Project Folder name]`
+Run the script, `perl run.py` and follow the steps.

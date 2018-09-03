@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from distutils.core import setup
 
-VERSION = '0.0.1'
+VERSION = '0.0.4'
 setup(
     name = 'gmxsmdscript',
     version = VERSION,

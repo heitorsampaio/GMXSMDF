@@ -13,22 +13,6 @@ parser.add_argument("-mdt", dest="mdtime", required=True,
                     help="MD simulation time in nsteps (2 * 500000 = 1000 ps (1 ns)")
 args = parser.parse_args()
 
-def yes_or_no(question):
-    reply = str(input(question+' (y/n): ')).lower().strip()
-    if reply[0] == 'y':
-        return 1
-    elif reply[0] == 'n':
-        raise SystemExit
-    else:
-        return yes_or_no("Would you like to run the simulation? (y/n) ")
-
-print("This Script was made by Heitor Sampaio")
-while True:
-    print("The pourpose of this script is to run a Simple MD simulation...")
-    if(yes_or_no('Would you like to run the simulation?  ')):
-        break
-print("done")
-
 print(args.structure.name)
 print(args.folder)
 print(args.mdtime)

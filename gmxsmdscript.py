@@ -32,7 +32,7 @@ if 'GMXPREFIX' not in os.environ:
     vars = ['GMXPREFIX', 'GMXBIN', 'GMXLDLIB', 'GMXMAN', 'GMXDATA',
            'GROMACS_DIR', 'LD_LIBRARY_PATH', 'MANPATH', 'PKG_CONFIG_PATH',
             'GROMACS_DIR', 'PATH']
-    args = ['bash', '-c', ". /Users/heitorsampaio/opt/bin/GMXRC && echo %s" %
+    args = ['bash', '-c', ". /usr/local/gromacs/bin/GMXRC && echo %s" %
             '\t'.join(['$%s' % v for v in vars])]
 
     out = subprocess.check_output(args)

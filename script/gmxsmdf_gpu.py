@@ -40,7 +40,7 @@ with system(args.folder):
         water = 'spce',
         f     = [args.structure.name],
         o     = 'prot.gro',
-        p     = 'topol.top'
+        p     = 'topol.top',
         ignh = 'true'
     )
 
@@ -168,6 +168,7 @@ with system(args.folder):
     )
 
     # Molecular dynamics
+    grompp(
         f = MDP['md.mdp', {
             'nsteps'       : args.mdtime ,
         }],
