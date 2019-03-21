@@ -1,7 +1,7 @@
 # GMXSMDF
 GROMACS automated and User Friendly toolbox 
 
-![Image of toolbox](https://i.imgur.com/dEdExm1.png)
+![Image of toolbox](https://i.imgur.com/seiwdIC.png)
 
 ## Dependencies
 
