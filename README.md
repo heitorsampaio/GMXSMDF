@@ -1,7 +1,7 @@
 # GMXSMDF
 GROMACS automated and User Friendly toolbox 
 
-![Image of toolbox](https://i.imgur.com/dEdExm1.png)
+![Image of toolbox](https://i.imgur.com/seiwdIC.png)
 
 ## Dependencies
 
@@ -14,4 +14,7 @@ GROMACS automated and User Friendly toolbox
 
 Enter `python3 setup.py install` at your command line.
 
-Run the script, `perl run.py` and follow the steps.
+Enter `perl configure.pl` at your command line.
+
+Enter `python3 run.py` to start the script.
+
