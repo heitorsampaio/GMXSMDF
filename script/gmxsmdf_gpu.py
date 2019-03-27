@@ -4,6 +4,8 @@ from gmxsmdscript import *
 import sys
 import argparse
 
+GLOBAL_PATH='/Users/heitorsampaio/GMXSMDF/'
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", dest="structure", required=True,
                     help="Structure filename directory '/home/patgen/Documentos/Dynamics/ProjectName'", type=lambda f: open(f))
@@ -13,27 +15,12 @@ parser.add_argument("-mdt", dest="mdtime", required=True,
                     help="MD simulation time in nsteps (2 * 500000 = 1000 ps (1 ns)")
 args = parser.parse_args()
 
-def yes_or_no(question):
-    reply = str(input(question+' (y/n): ')).lower().strip()
-    if reply[0] == 'y':
-        return 1
-    elif reply[0] == 'n':
-        raise SystemExit
-    else:
-        return yes_or_no("Would you like to run the simulation? (y/n) ")
-
-print("This Script was made by Heitor Sampaio")
-while True:
-    print("The pourpose of this script is to run a Simple MD simulation...")
-    if(yes_or_no('Would you like to run the simulation?  ')):
-        break
-print("done")
 
 print(args.structure.name)
 print(args.folder)
 print(args.mdtime)
 
-with system(args.folder):
+with system(GLOBAL_PATH+'Analysis/'+args.folder):
     # System preparation
     pdb2gmx(
         ff    = 'gromos53a6',
@@ -60,7 +47,7 @@ with system(args.folder):
 
     grompp(
 	maxwarn = 2,
-        f = MDP['ions.mdp'],
+        f = MDP[GLOBAL_PATH+'configs/ions.mdp'],
         c = 'sol.gro',
         o = 'ions.tpr',
         p = 'topol.top'
@@ -78,7 +65,7 @@ with system(args.folder):
 
     # Steep descent energy minimization
     grompp(
-        f = MDP['em.mdp'],
+        f = MDP[GLOBAL_PATH+'configs/em.mdp'],
         c = 'ions.gro',
         o = 'em.tpr',
         p = 'topol.top',
@@ -86,10 +73,8 @@ with system(args.folder):
     mdrun(deffnm = 'em' ,
         cpi = 'md.cpt',
         append = 'true',
-        nt = 20,
-        pinoffset = 1,
-        pinstride = 2,
-        gpu_id = "01",
+        ntmpi = 8,
+        gpu_id = "0,1,2,3,4,5,6,7",
         v = 'true',
         resethway = 'true',
         pin = 'on',
@@ -105,7 +90,7 @@ with system(args.folder):
 
     #nvt
     grompp(
-        f = MDP['nvt.mdp'],
+        f = MDP[GLOBAL_PATH+'configs/nvt.mdp'],
         c = 'em.gro',
         o = 'nvt.tpr',
         p = 'topol.top',
@@ -114,10 +99,8 @@ with system(args.folder):
     mdrun(deffnm = 'nvt',
         cpi = 'md.cpt',
         append = 'true',
-        nt = 20,
-        pinoffset = 1,
-        pinstride = 2,
-        gpu_id = "01",
+        ntmpi = 8,
+        gpu_id = "0,1,2,3,4,5,6,7",
         v = 'true',
         resethway = 'true',
         pin = 'on',
@@ -133,7 +116,7 @@ with system(args.folder):
 
     #npt
     grompp(
-        f = MDP['npt.mdp'],
+        f = MDP[GLOBAL_PATH+'configs/npt.mdp'],
         c = 'nvt.gro',
         o = 'npt.tpr',
         p = 'topol.top',
@@ -143,10 +126,9 @@ with system(args.folder):
     mdrun(deffnm = 'npt' ,
         cpi = 'md.cpt',
         append = 'true',
-        nt = 20,
-        pinoffset = 1,
-        pinstride = 2,
-        gpu_id = "01",
+        #ntomp = 20,
+        ntmpi = 8,
+        gpu_id = "0,1,2,3,4,5,6,7",
         v = 'true',
         resethway = 'true',
         pin = 'on',
@@ -169,7 +151,7 @@ with system(args.folder):
 
     # Molecular dynamics
     grompp(
-        f = MDP['md.mdp', {
+        f = MDP[GLOBAL_PATH+'configs/md.mdp', {
             'nsteps'       : args.mdtime ,
         }],
         c = 'npt.gro',
@@ -181,10 +163,9 @@ with system(args.folder):
     mdrun(deffnm = 'md',
         cpi = 'md.cpt',
         append = 'true',
-        nt = 20,
-        pinoffset = 1,
-        pinstride = 2,
-        gpu_id = "01",
+        #ntomp = 20,
+        ntmpi = 8,
+        gpu_id = "0,1,2,3,4,5,6,7",
         v = 'true',
         resethway = 'true',
         pin = 'on',

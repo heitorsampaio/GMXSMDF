@@ -4,6 +4,8 @@ from gmxsmdscript import *
 import sys
 import argparse
 
+GLOBAL_PATH='/Users/heitorsampaio/GMXSMDF/'
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", dest="structure", required=True,
                     help="Structure filename directory '/home/patgen/Documentos/Dynamics/ProjectName'", type=lambda f: open(f))
@@ -17,7 +19,7 @@ print(args.structure.name)
 print(args.folder)
 print(args.mdtime)
 
-with system(args.folder):
+with system(GLOBAL_PATH+'Analysis/'+args.folder):
     # System preparation
     pdb2gmx(
         ff    = 'gromos53a6',
@@ -44,7 +46,7 @@ with system(args.folder):
 
     grompp(
 	maxwarn = 2,
-        f = MDP['ions.mdp'],
+        f = MDP[GLOBAL_PATH+'configs/ions.mdp'],
         c = 'sol.gro',
         o = 'ions.tpr',
         p = 'topol.top'
@@ -62,7 +64,7 @@ with system(args.folder):
 
     # Steep descent energy minimization
     grompp(
-        f = MDP['em.mdp'],
+        f = MDP[GLOBAL_PATH+'configs/em.mdp'],
         c = 'ions.gro',
         o = 'em.tpr',
         p = 'topol.top',
@@ -89,7 +91,7 @@ with system(args.folder):
 
     #nvt
     grompp(
-        f = MDP['nvt.mdp'],
+        f = MDP[GLOBAL_PATH+'configs/nvt.mdp'],
         c = 'em.gro',
         o = 'nvt.tpr',
         p = 'topol.top',
@@ -117,7 +119,7 @@ with system(args.folder):
 
     #npt
     grompp(
-        f = MDP['npt.mdp'],
+        f = MDP[GLOBAL_PATH+'configs/npt.mdp'],
         c = 'nvt.gro',
         o = 'npt.tpr',
         p = 'topol.top',
@@ -153,7 +155,7 @@ with system(args.folder):
 
     # Molecular dynamics
     grompp(
-        f = MDP['md.mdp', {
+        f = MDP[GLOBAL_PATH+'configs/md.mdp', {
             'nsteps'       : args.mdtime ,
         }],
         c = 'npt.gro',

@@ -57,7 +57,7 @@ if (prompt_yn("GMXSMDF will be installed into <$install_dir> ")){
 print "Start install GMXSMDF into <$install_dir>\n"; 
 
 
-$files		="run.py";
+$files		="run.py,script/gmxsmdf_gpu.py,script/gmxsmdf_nogpu.py,script/gmxsmdf_checkpoint_nogpu.py,script/gmxsmdf_checkpoint_gpu.py";
 
 @updatelist		=split(/,/,$files);
 

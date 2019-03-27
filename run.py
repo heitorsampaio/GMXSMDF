@@ -2,6 +2,7 @@ from subprocess import call
 import subprocess
 import os
 import sys
+import errno
 
 GLOBAL_PATH='/Users/heitorsampaio/GMXSMDF/'
 
@@ -72,17 +73,28 @@ def menu():
     else:
         menu()
 
+def folder_ana():
+    ana = GLOBAL_PATH+'Analysis/'
+    try:
+        os.mkdir(ana)
+    except OSError as exc:
+        if exc.errno != errno.EEXIST:
+            raise
+        pass
+        os.chdir(ana)
+
 def smdgpu():
     struc = input('Enter the structure .pdb file: ')
     folder = input('Enter the folder name output: ')
     nsTIME = input('Enter the simulation time in NS: ')
-    ns = 0.001
+    #ns = 0.001
     nSTE = 1000
     gM = 2
 
-    nsPS = float(nsTIME) / float(ns)
+    nsPS = float(nsTIME) / (0.001)
     nsToNSTE = nsPS * nSTE
-    mdTime = nsToNSTE / gM
+    mdTime = int(nsToNSTE / gM)
+    folder_ana()
     call ([
         'python3',
         GLOBAL_PATH+'script/gmxsmdf_gpu.py',
@@ -95,13 +107,14 @@ def smdngpu():
     struc = input('Enter the structure .pdb file: ')
     folder = input('Enter the folder name output: ')
     nsTIME = input('Enter the simulation time in NS: ')
-    ns = 0.001
+    #ns = 0.001
     nSTE = 1000
     gM = 2
 
-    nsPS = float(nsTIME) / float(ns)
+    nsPS = float(nsTIME) / (0.001)
     nsToNSTE = nsPS * nSTE
-    mdTime = nsToNSTE / gM
+    mdTime = int(nsToNSTE / gM)
+    folder_ana()
     call ([
         'python3',
         GLOBAL_PATH+'script/gmxsmdf_nogpu.py',
@@ -115,14 +128,14 @@ def compmdgpu():
     folder = input('Enter the folder name output: ')
     tcGroup = input('Enter the TC Group [EX:. Protein_LIGNAME]: ')
     nsTIME = input('Enter the simulation time in NS: ')
-    ns = 0.001
+    #ns = 0.001
     nSTE = 1000
     gM = 2
 
-    nsPS = float(nsTIME) / float(ns)
+    nsPS = float(nsTIME) / (0.001)
     nsToNSTE = nsPS * nSTE
-    mdTime = nsToNSTE / gM
-
+    mdTime = int(nsToNSTE / gM)
+    folder_ana()
     call([
         'python3',
         GLOBAL_PATH+'script/complex/complex_gpu.py',
@@ -139,14 +152,14 @@ def compmdngpu():
     folder = input('Enter the folder name output: ')
     tcGroup = input('Enter the TC Group [EX:. Protein_LIGNAME]: ')
     nsTIME = input('Enter the simulation time in NS: ')
-    ns = 0.001
+    #ns = 0.001
     nSTE = 1000
     gM = 2
-
-    nsPS = float(nsTIME) / float(ns)
+    
+    nsPS = float(nsTIME) / (0.001)
     nsToNSTE = nsPS * nSTE
-    mdTime = nsToNSTE / gM
-
+    mdTime = int(nsToNSTE / gM)
+    folder_ana()
     call([
         'python3',
         GLOBAL_PATH+'script/complex/complex_nogpu.py',
@@ -160,7 +173,7 @@ def compmdngpu():
 def chkptgpu():
     folder = input('Enter the folder name that contains md files: ')
     struc = input('Enter the structure .pdb file: ')
-
+    folder_ana()
     call([
         'python3',
         GLOBAL_PATH+'script/gmxsmdf_checkpoint_gpu.py'
@@ -171,7 +184,7 @@ def chkptgpu():
 def chkptngpu():
     folder = input('Enter the folder name that contains md files: ')
     struc = input('Enter the structure .pdb file: ')
-
+    folder_ana()
     call([
         'python3',
         GLOBAL_PATH+'script/gmxsmdf_checkpoint_nogpu.py'
