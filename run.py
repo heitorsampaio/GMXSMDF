@@ -84,9 +84,9 @@ def folder_ana():
         os.chdir(ana)
 
 def smdgpu():
-    struc = input('Enter the structure .pdb file: ')
-    folder = input('Enter the folder name output: ')
-    nsTIME = input('Enter the simulation time in NS: ')
+    struc = input('[?] [r] Enter the structure .pdb file: ')
+    folder = input('[?] [r] [?] [r] Enter the folder name output: ')
+    nsTIME = input('[?] [r] Enter the simulation time in NS: ')
     #ns = 0.001
     nSTE = 1000
     gM = 2
@@ -104,9 +104,9 @@ def smdgpu():
 
     ])
 def smdngpu():
-    struc = input('Enter the structure .pdb file: ')
-    folder = input('Enter the folder name output: ')
-    nsTIME = input('Enter the simulation time in NS: ')
+    struc = input('[?] [r] Enter the structure .pdb file: ')
+    folder = input('[?] [r] Enter the folder name output: ')
+    nsTIME = input('[?] [r] Enter the simulation time in NS: ')
     #ns = 0.001
     nSTE = 1000
     gM = 2
@@ -123,11 +123,11 @@ def smdngpu():
         '-mdt',str(mdTime)
     ])
 def compmdgpu():
-    struc = input('Enter the structure .pdb file: ')
-    ligand = input('Enter the ligand .gro file: ')
-    folder = input('Enter the folder name output: ')
-    tcGroup = input('Enter the TC Group [EX:. Protein_LIGNAME]: ')
-    nsTIME = input('Enter the simulation time in NS: ')
+    struc = input('[?] [r] Enter the structure .pdb file: ')
+    ligand = input('[?] [r] Enter the ligand .gro file: ')
+    folder = input('[?] [r] Enter the folder name output: ')
+    tcGroup = input('[?] [r] Enter the TC Group [EX:. Protein_LIGNAME]: ')
+    nsTIME = input('[?] [r] Enter the simulation time in NS: ')
     #ns = 0.001
     nSTE = 1000
     gM = 2
@@ -147,11 +147,11 @@ def compmdgpu():
 
     ])
 def compmdngpu():
-    struc = input('Enter the structure .pdb file: ')
-    ligand = input('Enter the ligand .gro file: ')
-    folder = input('Enter the folder name output: ')
-    tcGroup = input('Enter the TC Group [EX:. Protein_LIGNAME]: ')
-    nsTIME = input('Enter the simulation time in NS: ')
+    struc = input('[?] [r] Enter the structure .pdb file: ')
+    ligand = input('[?] [r] Enter the ligand .gro file: ')
+    folder = input('[?] [r] Enter the folder name output: ')
+    tcGroup = input('[?] [r] Enter the TC Group [EX:. Protein_LIGNAME]: ')
+    nsTIME = input('[?] [r] Enter the simulation time in NS: ')
     #ns = 0.001
     nSTE = 1000
     gM = 2
@@ -171,8 +171,8 @@ def compmdngpu():
 
     ])
 def chkptgpu():
-    folder = input('Enter the folder name that contains md files: ')
-    struc = input('Enter the structure .pdb file: ')
+    folder = input('[?] [r] Enter the folder name that contains md files: ')
+    struc = input('[?] [r] Enter the structure .pdb file: ')
     folder_ana()
     call([
         'python3',
@@ -182,8 +182,8 @@ def chkptgpu():
     ])
 
 def chkptngpu():
-    folder = input('Enter the folder name that contains md files: ')
-    struc = input('Enter the structure .pdb file: ')
+    folder = input('[?] [r] Enter the folder name that contains md files: ')
+    struc = input('[?] [r] Enter the structure .pdb file: ')
     folder_ana()
     call([
         'python3',
